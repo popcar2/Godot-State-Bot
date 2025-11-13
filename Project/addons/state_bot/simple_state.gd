@@ -6,7 +6,11 @@ class_name SimpleState
 ## A [SimpleState] must have a [StateBot] ancestor.
 extends Node
 
+## Optional signal for when this [SimpleState] has been entered.
+## This is automatically emitted when switching [member StateBot.current_state].
 signal entered
+## Optional signal for when this [SimpleState] has been exited.
+## This is automatically emitted when switching [member StateBot.current_state].
 signal exited
 
 ## The state to switch to when [method StateBot.next_state] is called.
@@ -119,3 +123,8 @@ func get_next() -> SimpleState:
 	# Otherwise, return the next state
 	else:
 		return next_state
+
+## Returns whether this [SimpleState] is currently being used by the [StateBot] or not.
+## Shorthand for [code]state_bot.current_state == self[/code]
+func is_current_state() -> bool:
+	return state_bot.current_state == self
